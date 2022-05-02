@@ -1,0 +1,57 @@
+:host {
+    flex: 1 0 auto;
+}
+
+.file-container{
+    margin: 10px;
+    
+    img{
+        box-shadow: 0 3px 8px 0 rgb(34 36 38 / 46%);
+    }
+
+    i{
+        cursor: pointer;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2
+    }
+    i::before{
+        font-size: 3rem;
+    }
+    i::after{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+        content: '';
+        background: -webkit-radial-gradient(transparent 45%,rgba(0,0,0,.3));
+        background: radial-gradient(transparent 45%,rgba(0,0,0,.3));
+        opacity: .5;
+        -webkit-transition: opacity .5s ease;
+        transition: opacity .5s ease;
+    }
+}
+
+.content-wrapper{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+
+    img{
+        cursor: pointer;
+    }
+
+    .video-thumb{
+        border: 1px rgba(41, 41, 41, 0.699) dashed;
+    }
+}

@@ -1,16 +1,50 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule }   from '@angular/common/http';
 
+/* Components */
 import { AppComponent } from './app.component';
+import { SearchComponent } from './search/search.component';
+import { PreviewComponent } from './preview/preview.component';
+import { ContentViewerComponent } from './content-viewer/content-viewer.component';
+
+
+/* Services */
+import { ThreadsService } from './services/threads.service';
+
+/* NgRx Store */
+import { StoreModule } from '@ngrx/store';
+import { rootReducer } from './store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { ThreadsEffects } from './store/effects/threads.effects';
+
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchComponent,
+    PreviewComponent,
+    ContentViewerComponent,
+    FooterComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    StoreModule.forRoot(rootReducer),
+    StoreDevtoolsModule.instrument({
+      name: 'NgRx Demo App',
+    }),
+    EffectsModule.forRoot([ThreadsEffects]),
+    NoopAnimationsModule,
+    DragDropModule
   ],
-  providers: [],
+  providers: [ThreadsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

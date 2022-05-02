@@ -1,0 +1,157 @@
+<div class="logo">
+  <img src="../../assets/img/logo1.png" alt="logo">
+</div>
+
+<div class="url-input">
+  <div class="ui fluid action input">
+    <input
+      type="url" 
+      placeholder="Enter thread URL..." 
+      class="url-form" 
+      name="url" 
+      [(ngModel)]="enterURL" 
+      #url="ngModel" 
+      required
+    >
+    <button 
+      class="ui icon orange button"
+      [disabled]="url.invalid" 
+      (click)="submitURL(enterURL)"
+    >
+      <i class="lightning icon"></i>
+    </button>
+  </div>
+  <button
+    (click)="openOptions()" 
+    class="ui icon gray button"
+  >
+    <i class="cog icon"></i>
+  </button>
+</div>
+
+<div class="options-menu" #OptionsMenu style="display: none">
+  <div class="ui segment options-wrapper">
+    <div class="ui form ">
+      <div class="inline fields ratio-wrapper">
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="frequency" checked="checked" 
+            (change)="changeViewMod('all')"
+            >
+            <label>All content</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input 
+              type="radio" name="frequency" 
+              (change)="changeViewMod('pictures')"
+            >
+            <label>Only pictures</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input 
+              type="radio" 
+              name="frequency" 
+              (change)="changeViewMod('videos')"
+            >
+            <label>Only videos</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    |
+    <div class="timer-wrapper">
+      <div class="ui checkbox option timer-checkbox">
+        <input 
+          type="checkbox" 
+          [ngModel]="optionsState.updateThreads" 
+          (change)="toggleUpdateThread()"
+        >
+        <label>Update threads</label>
+      </div>
+      <div class="ui mini input timer-input">
+        <input 
+          type="text" 
+          placeholder="sec" 
+          #TimerInput 
+          [ngModel]="optionsState.updatePeriod" 
+          (change)="setUpdatePeriod(+this.timerInput.nativeElement.value)" 
+          (keypress)="validationOptionsInput($event)"
+          (paste)="validationOptionsInput($event)"
+          maxlength="3"
+        >
+      </div>
+    </div>
+    |
+    <div class="ui checkbox option">
+      <input 
+        type="checkbox" 
+        [ngModel]="optionsState.darkTheme" 
+        (change)="toggleDarkTheme()" 
+        disabled
+      >
+      <label>Dark theme</label>
+    </div>
+  </div>
+</div>
+
+<div class="control-menu" *ngIf="threadsState.threads.length > 0">
+  <div class="threads-menu">
+
+    <label *ngFor="let thread of threadsState.threads; index as i">
+      
+      <ng-container *ngIf="i === threadsState.selectedThreadID; then activeButton else inactiveButton"></ng-container>
+
+      <ng-template #activeButton>
+        <div class="ui buttons">
+          <button 
+            class="ui orange button"
+            (click)="changeThread(i)"
+          >
+          /{{thread.board}}/ {{thread.current_thread}}
+          </button>
+  
+          <button 
+            class="ui icon orange button"
+            (click)="deleteThread(i)"
+          >
+            <i class="x icon icon" style="color: rgba(0, 0, 0, 0.568)"></i>
+          </button>
+        </div>
+      </ng-template>
+
+      <ng-template #inactiveButton>
+        <div class="ui buttons">
+          <button 
+            class="ui grey basic button"
+            (click)="changeThread(i)"
+          >
+          /{{thread.board}}/ {{thread.current_thread}}
+          </button>
+
+          <button 
+            class="ui icon grey basic button"
+            (click)="deleteThread(i)"
+          >
+            <i class="x icon icon" style="color: rgba(0, 0, 0, 0.568)"></i>
+          </button>
+        </div>
+      </ng-template>
+      
+    </label>
+
+  </div>
+  
+  <div 
+    class="download-button-conainer"
+    (click)="downloadThread(threadsState.selectedThreadID)"
+  >
+    <button class="ui labeled icon pink button">
+      <i class="download icon"></i>
+      Download
+    </button>
+  </div>
+</div>

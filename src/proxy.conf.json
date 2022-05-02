@@ -1,0 +1,8 @@
+{
+    "/": {
+        "target": "https://2ch.hk",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

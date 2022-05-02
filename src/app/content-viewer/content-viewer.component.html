@@ -1,0 +1,23 @@
+<ng-container *ngIf="viewerState.isActive && viewerState.content">
+	<div class="view-wrapper" cdkDrag [ngStyle]="{'height': 'calc(20px + ' + viewerState?.content?.height + 'px)' }">
+		<div class="control-panel" cdkDragHandle >
+			<label class="exit-btn" (click)="closeViewer()">X</label>
+		</div>
+
+			<ng-container *ngIf="viewerState?.content?.type == 10 || viewerState?.content?.type == 6; then videoContent else pictureContent">
+			</ng-container>
+
+			<ng-template #pictureContent>
+				<img  class="v-img" src="https://2ch.hk/{{viewerState?.content?.path}}" alt="test" (click)="closeViewer()">
+			</ng-template>
+
+			<ng-template #videoContent>
+				<video class="v-video" src="https://2ch.hk/{{viewerState?.content?.path}}" autoplay loop controls="controls"></video>
+			</ng-template>
+
+	</div>
+</ng-container>
+
+
+
+

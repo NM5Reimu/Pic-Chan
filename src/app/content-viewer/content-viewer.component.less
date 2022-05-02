@@ -1,0 +1,52 @@
+:host {
+	height: 100%;
+    width: 100%;
+    pointer-events: none;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    z-index: 100;
+}
+
+.view-wrapper {
+	display: flex;
+    flex-direction: column;
+	max-height: 80%;
+    max-width: 70%;
+	
+	background: #fff;
+	position: fixed;
+	pointer-events: auto;
+	z-index: 101;
+	transition: box-shadow 100ms cubic-bezier(0, 0, 0.2, 1);
+	box-shadow: 0px 1px 3px 3px rgb(0 0 0 / 40%);
+
+	.control-panel {
+		cursor: move;
+		height: 20px;
+		width: 100%;
+		background: rgb(49, 49, 49);
+		display: flex;
+		flex-direction: row-reverse;
+		padding: 0 7px;
+	}
+
+	.v-img,
+	.v-video {
+		cursor: pointer;
+		height: calc(100% - 20px);
+		object-fit: cover;
+	}
+
+	.exit-btn {
+		cursor: pointer;
+		text-align: center;
+		color: rgb(255, 255, 255);
+	}
+}	
+
+.view-wrapper:active {
+	box-shadow: 0px 1px 7px 5px rgb(0 0 0 / 40%);
+}

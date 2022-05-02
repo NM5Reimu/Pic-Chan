@@ -31,22 +31,25 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less"
+              "src/custom-theme.scss",
+              "src/styles.less",
+              "node_modules/semantic-ui-css/semantic.min.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "100kb",
+                  "maximumError": "500kb"
                 }
               ],
               "fileReplacements": [
@@ -75,7 +78,8 @@
               "browserTarget": "pic-chan:build:production"
             },
             "development": {
-              "browserTarget": "pic-chan:build:development"
+              "browserTarget": "pic-chan:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -99,7 +103,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less"   
             ],
             "scripts": []
           }

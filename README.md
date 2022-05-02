@@ -1,27 +1,37 @@
 # PicChan
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.3.
+***inb4***
+Проект не претендует на что-то серьезное и был сделан с целью потыкать палкой angular и nginx.
 
-## Development server
+Потыкать демку можно [тут](https://shaaark.ga/).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+***Функционал***
+- Мониторинг всего контента на [2ch.kh](https://2ch.hk/) в выбранных тредах
+- Просмотр пикч/видео
+- Загрузка контента в виде архива
+- Настройка отображения (весь контент | только видео | только изображения)
+- Функция автоматического обновления тредов
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+***функционал?.какоторый?.добавится***
+- Скейлинг контента
+- Адаптивный дизигн (нет)
+- Мелкие улучшалки
+- Темная тема
 
-## Build
+***Что использовалось***
+- Angular
+- NgRx
+- RxJs
+- Angular Material 
+- SemanticUI
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+***Скриншоты***
 
-## Running unit tests
+![Main](https://i.imgur.com/0WeYnFM.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+![View](https://i.imgur.com/bj0XvHq.png)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![Viewer](https://i.imgur.com/EvugV4d.png)
