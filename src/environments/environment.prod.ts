@@ -1,6 +1,4 @@
-import { EnvironmentInterface } from "./environment";
-
-export const environment: EnvironmentInterface = {
+export const environment = {
   production: true,
   API_URL: "https://api.shaaark.ga/chan/"
 };
