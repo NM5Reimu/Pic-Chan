@@ -1,6 +1,5 @@
-<div class="content-wrapper" *ngIf="threadsState.threads.length > 0">
-  <div class="file-container"  *ngFor="let file of filterContentByViewMod(threadsState.threads[threadsState.selectedThreadID].files)">
-
+<div class="files-grid" *ngIf="threadsState.threads.length > 0">
+  <div class="files-grid__item" *ngFor="let file of filterContentByViewMod(threadsState.threads[threadsState.selectedThreadID].files)">
     <ng-container *ngIf="file?.type === 10 || file?.type === 6; then videoThumb else pictureThumb">
     </ng-container>
 
@@ -14,12 +13,10 @@
         height="{{file.tn_height}}"
       >
     </ng-template>
-
+    
     <ng-template #videoThumb>
-      <div class="ui embed" [style.width.px]=(file.tn_width) [style.height.px]=(file.tn_height) >
-        <i class="play icon">
-
-        </i>
+      <div class="ui embed video-thumb-wrapper" [style.width.px]=(file.tn_width) [style.height.px]=(file.tn_height) [ngStyle]="{'padding-bottom': '0'}">
+        <i class="play icon"></i>
         <img
           class="video-thumb"  
           src="{{mainURL}}{{file.thumbnail}}" 
@@ -31,6 +28,5 @@
         >
       </div>
     </ng-template>
-
-  </div>
+  </div>    
 </div>
