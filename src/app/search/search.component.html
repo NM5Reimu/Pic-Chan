@@ -100,7 +100,6 @@
 
 <div class="control-menu" *ngIf="threadsState.threads.length > 0">
   <div class="threads-menu">
-
     <label *ngFor="let thread of threadsState.threads; index as i">
       
       <ng-container *ngIf="i === threadsState.selectedThreadID; then activeButton else inactiveButton"></ng-container>
@@ -142,14 +141,10 @@
       </ng-template>
       
     </label>
-
   </div>
   
-  <div 
-    class="download-button-conainer"
-    (click)="downloadThread(threadsState.selectedThreadID)"
-  >
-    <button class="ui labeled icon pink button">
+  <div class="download-button-conainer">
+    <button class="ui labeled icon pink button" [disabled]="downloadDisable" (click)="downloadThread(threadsState.selectedThreadID)">
       <i class="download icon"></i>
       Download
     </button>

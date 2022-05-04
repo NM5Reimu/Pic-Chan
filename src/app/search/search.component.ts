@@ -28,6 +28,7 @@ export class SearchComponent implements OnInit{
   optionsState: OptionsReducerState;
 
   enterURL: string = '';
+  downloadDisable: boolean = false;
 
   updateTimer: ReturnType<typeof setTimeout>;
   
@@ -70,15 +71,12 @@ export class SearchComponent implements OnInit{
     switch (this.optionsState.viewMod) {
       case "all":
         return files
-        break;
 
       case "pictures":
         return files.filter((file: PostFile) => file.type !== 10)
-        break;
 
       case "videos":
         return files.filter((file: PostFile) => file.type === 10)
-        break;
 
       default:
         return files;
@@ -86,6 +84,8 @@ export class SearchComponent implements OnInit{
   }
 
   downloadThread(id: number): void {
+    this.downloadDisable = true;
+
     const threadFiles: JSZip = new JSZip();
 
     // * Responce => Blob => File => toZIP
@@ -95,7 +95,10 @@ export class SearchComponent implements OnInit{
       threadFiles.file(file.displayname, fileBlob)
     }
 
-    threadFiles.generateAsync({type:"blob"}).then(content => saveAs(content, this.threadsState.threads[id].title));
+    threadFiles.generateAsync({type:"blob"}).then(content => {
+      saveAs(content, this.threadsState.threads[id].title)
+      this.downloadDisable = false;
+    });
   }
 
   toggleUpdateThread(): void {
