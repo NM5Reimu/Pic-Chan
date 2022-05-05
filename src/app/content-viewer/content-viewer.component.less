@@ -36,7 +36,8 @@
 	.v-img,
 	.v-video {
 		cursor: pointer;
-		height: calc(100% - 20px);
+		// height: calc(100% - 20px);
+		height: 100%;
 		object-fit: cover;
 	}
 
@@ -49,4 +50,12 @@
 
 .view-wrapper:active {
 	box-shadow: 0px 1px 7px 5px rgb(0 0 0 / 40%);
+}
+
+.view-wrapper--grag{
+	display: flex;
+	position: fixed;
+	pointer-events: auto;
+	z-index: 101;
+	box-shadow: 0px 1px 3px 3px rgb(0 0 0 / 40%);
 }

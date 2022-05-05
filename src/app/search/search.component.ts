@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit{
   threadsState: ThreadReducerState;
   optionsState: OptionsReducerState;
 
-  enterURL: string = '';
+  enterURL: string = 'https://2ch.hk/po/res/46440864.html';
   downloadDisable: boolean = false;
 
   updateTimer: ReturnType<typeof setTimeout>;
