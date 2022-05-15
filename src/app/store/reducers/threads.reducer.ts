@@ -8,7 +8,7 @@ export interface ThreadReducerState {
 }
 
 const initialState: ThreadReducerState = {
-	threads: [],
+	threads: JSON.parse(localStorage.getItem('savedThread') || '[]') ,
 	selectedThreadID: 0
 }
 

@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 import { PreviewComponent } from './preview/preview.component';
 import { ContentViewerComponent } from './content-viewer/content-viewer.component';
-
+import { FooterComponent } from './footer/footer.component';
 
 /* Services */
 import { ThreadsService } from './services/threads.service';
@@ -21,8 +21,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ThreadsEffects } from './store/effects/threads.effects';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import { FooterComponent } from './footer/footer.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -36,10 +35,8 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot(rootReducer),
-    StoreDevtoolsModule.instrument({
-      name: 'NgRx Demo App',
-    }),
+    StoreModule.forRoot(rootReducer), 
+    StoreDevtoolsModule.instrument({ name: 'NgRx PicChan' }),
     EffectsModule.forRoot([ThreadsEffects]),
     NoopAnimationsModule,
     DragDropModule

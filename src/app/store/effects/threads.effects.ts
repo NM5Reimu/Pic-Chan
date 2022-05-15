@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, map, mergeMap, catchError } from 'rxjs';
+//
+import { Store } from '@ngrx/store';
+import { AppState } from '..';
+import { ThreadReducerState } from '../reducers/threads.reducer';
+
+//
+import { EMPTY, map, mergeMap, catchError, tap, Subscription } from 'rxjs';
 import { ThreadsService } from '../../services/threads.service';
-import { LOAD_THREAD_REQUEST, LOAD_THREAD_SUCCESS, UPDATE_THREAD_REQUEST, UPDATE_THREAD_SUCCESS } from '../actions/threads.actions';
+import { DELETE_THREAD, LOAD_THREAD_REQUEST, LOAD_THREAD_SUCCESS, UPDATE_THREAD_REQUEST, UPDATE_THREAD_SUCCESS } from '../actions/threads.actions';
 import { DvachThread, PostFile } from '../models/threads.model';
  
 @Injectable()
@@ -10,8 +16,12 @@ export class ThreadsEffects {
  
   constructor(
     private actions$: Actions,
-    private threadsService: ThreadsService
+    private threadsService: ThreadsService,
+    private store: Store<AppState>
   ) {}
+  
+  threadsState: ThreadReducerState;
+  threadsState$: Subscription = this.store.select('threads').subscribe(data => this.threadsState = data);
 
   loadThread$ = createEffect(() => this.actions$.pipe(
     ofType(LOAD_THREAD_REQUEST),
@@ -106,4 +116,11 @@ export class ThreadsEffects {
       catchError(() => EMPTY)
     )),
   ))
+
+  saveThreads$ = createEffect(() => this.actions$.pipe(
+      ofType(...[LOAD_THREAD_SUCCESS, DELETE_THREAD]),
+      tap(() => localStorage.setItem('savedThreads', JSON.stringify(this.threadsState.threads?.map(thread => thread.threadURL) || [] )))
+    ),
+    { dispatch: false }
+  )
 }

@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { ThreadReducerState } from '../store/reducers/threads.reducer';
 import { OptionsReducerState } from '../store/reducers/options.reducer';
+import { SavesReducerState } from '../store/reducers/saves.reducer';
 import { CHANGE_SELECTED_THREAD, DELETE_THREAD, LOAD_THREAD_REQUEST, UPDATE_THREAD_REQUEST } from '../store/actions/threads.actions'
 import { CHANGE_VIEW_MOD, TOGGLE_DARK_THEME, TOGGLE_UPDATE_THREADS, SET_UPDATE_PERIOD } from '../store/actions/options.actions'
 
@@ -26,6 +27,7 @@ export class SearchComponent implements OnInit{
 
   threadsState: ThreadReducerState;
   optionsState: OptionsReducerState;
+  savesState: SavesReducerState;
 
   enterURL: string = 'https://2ch.hk/po/res/46440864.html';
   downloadDisable: boolean = false;
@@ -37,11 +39,13 @@ export class SearchComponent implements OnInit{
   ngOnInit(): void {
     this.fetchData()
     this.optionsState.updateThreads ? this.startUpdateTimer() : this.stopUpdateTimer();
+    this.savesState.savedThreads.length > 0 ? this.loadOldSessionThreads() : console.log('localstorade пуст')
   }
 
   fetchData(): void {
     const threadsState$: Subscription = this.store.select('threads').subscribe(data => this.threadsState = data);
     const optionsState$: Subscription = this.store.select('options').subscribe(data => this.optionsState = data);
+    const savesState$: Subscription = this.store.select('saves').subscribe(data => this.savesState = data);
   }
 
   submitURL(url: string): void {
@@ -125,7 +129,7 @@ export class SearchComponent implements OnInit{
     if(!this.optionsState.updateThreads) this.stopUpdateTimer();
 
     this.updateTimer = setInterval(() => {
-      console.log(`Try update threads. Interval: ${this.optionsState.updatePeriod * 1000}`)
+      console.log(`Try update threads. Interval: ${this.optionsState.updatePeriod} second.`) //! delete it?
       this.threadsState.threads.map((thread: DvachThread, id: number) => {
         this.store.dispatch(UPDATE_THREAD_REQUEST({threadID: id, threadURL: thread.threadURL}))
       })
@@ -134,6 +138,12 @@ export class SearchComponent implements OnInit{
 
   stopUpdateTimer(): void {
     clearInterval(this.updateTimer)
+  }
+
+  loadOldSessionThreads(): void {
+    this.savesState.savedThreads.map((url: string) => {
+      this.store.dispatch(LOAD_THREAD_REQUEST({url}))
+    })
   }
 
   validationOptionsInput(evt: any){
