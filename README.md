@@ -27,4 +27,4 @@
 - SemanticUI
 
 ![EFT](https://i.imgur.com/lTrO6DV.png)
-![Genshin](https://i.imgur.com/bj0XvHq.png)
+<!-- ![Genshin](https://i.imgur.com/bj0XvHq.png) -->
