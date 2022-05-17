@@ -26,4 +26,5 @@
 - Angular Material 
 - SemanticUI
 
-![Main](https://i.imgur.com/bj0XvHq.png)
+![EFT](https://i.imgur.com/lTrO6DV.png)
+![Genshin](https://i.imgur.com/bj0XvHq.png)
