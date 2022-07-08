@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit{
   optionsState: OptionsReducerState;
   savesState: SavesReducerState;
 
-  enterURL: string = 'https://2ch.hk/po/res/46440864.html';
+  enterURL: string = '';
   downloadDisable: boolean = false;
 
   updateTimer: ReturnType<typeof setTimeout>;
@@ -150,7 +150,7 @@ export class SearchComponent implements OnInit{
     let theEvent = evt || window.event;
     let key = theEvent.keyCode || theEvent.which;
     key = String.fromCharCode( key );
-    let regex = /[0-9]|\./;
+    let regex = /[0-9]/;
     if( !regex.test(key) ) {
       theEvent.returnValue = false;
       if(theEvent.preventDefault) theEvent.preventDefault();
