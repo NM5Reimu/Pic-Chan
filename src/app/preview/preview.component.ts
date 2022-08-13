@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store'
 import { ThreadReducerState } from '../store/reducers/threads.reducer';
 import { LOAD_CONTENT } from '../store/actions/viewer.actions'
-import { PostFile } from '../store/models/threads.model';
+import { DvachFile } from '../store/models/threads.model';
 import { OptionsReducerState } from '../store/reducers/options.reducer';
 
 @Component({
@@ -31,20 +31,20 @@ export class PreviewComponent implements OnInit {
     const optionsState$: Subscription = this.store.select('options').subscribe(data => this.optionsState = data);
   }
 
-  openViewer(file: PostFile): void {
+  openViewer(file: DvachFile): void {
     this.store.dispatch(LOAD_CONTENT({file}))
   }
   
-  filterContentByViewMod(files: PostFile[]): PostFile[] {
+  filterContentByViewMod(files: DvachFile[]): DvachFile[] {
     switch (this.optionsState.viewMod) {
       case "all":
         return files
 
       case "pictures":
-        return files.filter((file: PostFile) => file.type !== 10 && file.type !== 6)
+        return files.filter((file: DvachFile) => file.type !== 10 && file.type !== 6)
 
       case "videos":
-        return files.filter((file: PostFile) => file.type === 10 || file.type === 6)
+        return files.filter((file: DvachFile) => file.type === 10 || file.type === 6)
 
       default:
         return files;

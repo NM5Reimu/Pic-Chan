@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+
 //
 import { Store } from '@ngrx/store';
 import { AppState } from '..';
 import { ThreadReducerState } from '../reducers/threads.reducer';
 
 //
-import { EMPTY, map, mergeMap, catchError, tap, Subscription } from 'rxjs';
+import { map, mergeMap, catchError, tap, Subscription } from 'rxjs';
 import { ThreadsService } from '../../services/threads.service';
-import { DELETE_THREAD, LOAD_THREAD_REQUEST, LOAD_THREAD_SUCCESS, UPDATE_THREAD_REQUEST, UPDATE_THREAD_SUCCESS } from '../actions/threads.actions';
-import { DvachThread, PostFile } from '../models/threads.model';
+import { DELETE_THREAD, LOAD_THREAD_REQUEST, LOAD_THREAD_SUCCESS, UPDATE_THREAD_REQUEST, UPDATE_THREAD_SUCCESS, LOAD_THREAD_FAILURE } from '../actions/threads.actions';
+import { DvachThread, DvachFile, ResponceDvachThread } from '../models/threads.model';
  
 @Injectable()
 export class ThreadsEffects {
@@ -27,46 +28,25 @@ export class ThreadsEffects {
     ofType(LOAD_THREAD_REQUEST),
     mergeMap(action => this.threadsService.loadThread(action.url)
     .pipe(
-      map((data:any) => {
+      map((data:ResponceDvachThread) => {
 
-        // * Converting the received data to the required type 
-        // * and 36 lines of disgusting code
-
-        let threadPosts = data["threads"][0]["posts"];
-
-        let threadFiles: any[] = [];
-        threadPosts.map((post:any) => threadFiles.push(...post.files))
-
-        let files = threadFiles.map((file: any): PostFile => 
-          new PostFile(
-            file.displayname,
-            file.fullname,
-            file.name,
-            file.md5,
-            file.path,
-            file.thumbnail,
-            file.type,
-            file.height,
-            file.width,
-            file.tn_height,
-            file.tn_width,
-            file.size
-          )
-        );
-
-        let thread = new DvachThread(
-          data.Board,
+        const thread = new DvachThread(
+          data.board.id,
           data.posts_count,
           data.files_count,
           data.current_thread,
-          files,
+          [],
           data.title,
           action.url
         );
 
+        data.threads[0].posts.map((post:{files:DvachFile[]}) => post.files && thread.files.push(...post.files))
+
         return LOAD_THREAD_SUCCESS({thread})
       }),
-      catchError(() => EMPTY)
+      catchError(err => {
+        throw 'LOAD_THREAD_REQUEST failed. Details: ' + err;
+      })
     )),
   ))
 
@@ -74,46 +54,29 @@ export class ThreadsEffects {
     ofType(UPDATE_THREAD_REQUEST),
     mergeMap(action => this.threadsService.loadThread(action.threadURL)
     .pipe(
-      map((data:any) => {
+      map((data:ResponceDvachThread) => {
 
-        // * Converting the received data to the required type 
-        // * and 36 lines of disgusting code
-
-        let threadPosts = data["threads"][0]["posts"];
-
-        let threadFiles: any[] = [];
-        threadPosts.map((post:any) => threadFiles.push(...post.files))
-
-        let files = threadFiles.map((file: any): PostFile => 
-          new PostFile(
-            file.displayname,
-            file.fullname,
-            file.name,
-            file.md5,
-            file.path,
-            file.thumbnail,
-            file.type,
-            file.height,
-            file.width,
-            file.tn_height,
-            file.tn_width,
-            file.size
-          )
-        );
-
-        let thread = new DvachThread(
-          data.Board,
+        const thread = new DvachThread(
+          data.board.id,
           data.posts_count,
           data.files_count,
           data.current_thread,
-          files,
+          [],
           data.title,
           action.threadURL
         );
 
+        data.threads[0].posts.map((post:{files:DvachFile[]}) => {
+          if(post.files){
+            thread.files.push(...post.files)
+          }
+        })
+
         return UPDATE_THREAD_SUCCESS({threadID: action.threadID, thread: thread })
       }),
-      catchError(() => EMPTY)
+      catchError(err => {
+        throw 'UPDATE_THREAD_REQUEST failed. Details: ' + err;
+      })
     )),
   ))
 

@@ -13,7 +13,7 @@ import { CHANGE_VIEW_MOD, TOGGLE_DARK_THEME, TOGGLE_UPDATE_THREADS, SET_UPDATE_P
 //* Dependences for download function *//
 import * as JSZip from 'jszip';
 import { saveAs } from 'file-saver';
-import { DvachThread, PostFile } from '../store/models/threads.model';
+import { DvachThread, DvachFile } from '../store/models/threads.model';
 
 @Component({
   selector: 'app-search',
@@ -71,16 +71,16 @@ export class SearchComponent implements OnInit{
     this.store.dispatch(DELETE_THREAD({id}))
   }
 
-  filterContentByViewMod(files: PostFile[]): PostFile[] {
+  filterContentByViewMod(files: DvachFile[]): DvachFile[] {
     switch (this.optionsState.viewMod) {
       case "all":
         return files
 
       case "pictures":
-        return files.filter((file: PostFile) => file.type !== 10)
+        return files.filter((file: DvachFile) => file.type !== 10)
 
       case "videos":
-        return files.filter((file: PostFile) => file.type === 10)
+        return files.filter((file: DvachFile) => file.type === 10)
 
       default:
         return files;

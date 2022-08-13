@@ -1,9 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { PostFile } from '../models/threads.model';
+import { DvachFile } from '../models/threads.model';
 import { LOAD_CONTENT, CLOSE_VIEW} from '../actions/viewer.actions'
 
 export interface ViewerReducerState {
-	content?: PostFile
+	content?: DvachFile
 	isActive: boolean
 }
 
