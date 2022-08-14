@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit{
   ngOnInit(): void {
     this.fetchData()
     this.optionsState.updateThreads ? this.startUpdateTimer() : this.stopUpdateTimer();
-    this.savesState.savedThreads.length > 0 ? this.loadOldSessionThreads() : console.log('localstorade пуст')
+    this.savesState.savedThreads.length > 0 ? this.loadOldSessionThreads() : console.log('Missing saved threads!')
   }
 
   fetchData(): void {
@@ -53,7 +53,7 @@ export class SearchComponent implements OnInit{
     url = url.indexOf(".html") > 0 ? url.replace(new RegExp(".html","g"), ".json") : `${url}.json`
 
     this.store.dispatch(LOAD_THREAD_REQUEST({url}))
-    console.log(this.enterURL + " add to watchlist.");
+    // console.log(this.enterURL + " add to watchlist.");
     this.enterURL = '';
   }
   

@@ -2,3 +2,7 @@
 <app-preview></app-preview>
 <app-content-viewer></app-content-viewer>
 <app-footer></app-footer>
+
+<ng-container *ngIf="errorState.enabled">
+  <app-error-dialog></app-error-dialog>
+</ng-container>

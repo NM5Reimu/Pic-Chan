@@ -22,6 +22,7 @@ import { ThreadsEffects } from './store/effects/threads.effects';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     SearchComponent,
     PreviewComponent,
     ContentViewerComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -7,10 +7,11 @@ import { AppState } from '..';
 import { ThreadReducerState } from '../reducers/threads.reducer';
 
 //
-import { map, mergeMap, catchError, tap, Subscription } from 'rxjs';
+import { map, mergeMap, catchError, tap, Subscription, of } from 'rxjs';
 import { ThreadsService } from '../../services/threads.service';
 import { DELETE_THREAD, LOAD_THREAD_REQUEST, LOAD_THREAD_SUCCESS, UPDATE_THREAD_REQUEST, UPDATE_THREAD_SUCCESS, LOAD_THREAD_FAILURE } from '../actions/threads.actions';
 import { DvachThread, DvachFile, ResponceDvachThread } from '../models/threads.model';
+import { SHOW_ERROR } from '../actions/error.actions';
  
 @Injectable()
 export class ThreadsEffects {
@@ -44,9 +45,7 @@ export class ThreadsEffects {
 
         return LOAD_THREAD_SUCCESS({thread})
       }),
-      catchError(err => {
-        throw 'LOAD_THREAD_REQUEST failed. Details: ' + err;
-      })
+      catchError(err => of(SHOW_ERROR({enabled: true, id: 228, message: `Thread loading failure! \n ${action.url}`})))
     )),
   ))
 
@@ -74,9 +73,7 @@ export class ThreadsEffects {
 
         return UPDATE_THREAD_SUCCESS({threadID: action.threadID, thread: thread })
       }),
-      catchError(err => {
-        throw 'UPDATE_THREAD_REQUEST failed. Details: ' + err;
-      })
+      catchError(err => of(SHOW_ERROR({enabled: true, id: 322, message: `Thread updating failure! \n ${action.threadURL}`})))
     )),
   ))
 
