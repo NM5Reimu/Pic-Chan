@@ -23,6 +23,10 @@ import { ThreadsEffects } from './store/effects/threads.effects';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { environment } from 'src/environments/environment';
+
+
+const devModules = environment.production ? [] : [StoreDevtoolsModule.instrument({ name: 'NgRx PicChan' })];
 
 @NgModule({
   declarations: [
@@ -38,10 +42,10 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot(rootReducer), 
-    StoreDevtoolsModule.instrument({ name: 'NgRx PicChan' }),
     EffectsModule.forRoot([ThreadsEffects]),
     NoopAnimationsModule,
-    DragDropModule
+    DragDropModule,
+    ...devModules,
   ],
   providers: [ThreadsService],
   bootstrap: [AppComponent]
