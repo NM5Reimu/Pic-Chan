@@ -53,7 +53,6 @@ export class SearchComponent implements OnInit{
     url = url.indexOf(".html") > 0 ? url.replace(new RegExp(".html","g"), ".json") : `${url}.json`
 
     this.store.dispatch(LOAD_THREAD_REQUEST({url}))
-    // console.log(this.enterURL + " add to watchlist.");
     this.enterURL = '';
   }
   
@@ -129,7 +128,6 @@ export class SearchComponent implements OnInit{
     if(!this.optionsState.updateThreads) this.stopUpdateTimer();
 
     this.updateTimer = setInterval(() => {
-      console.log(`Try update threads. Interval: ${this.optionsState.updatePeriod} second.`) //! delete it?
       this.threadsState.threads.map((thread: DvachThread, id: number) => {
         this.store.dispatch(UPDATE_THREAD_REQUEST({threadID: id, threadURL: thread.threadURL}))
       })
