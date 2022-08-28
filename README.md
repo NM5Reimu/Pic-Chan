@@ -2,7 +2,7 @@
 
 ***inb4***
 
-Проект не претендует на что-то серьезное и был сделан с целью потыкать палкой angular и nginx.
+Пет-проект для "потыкать палкой angular и nginx".
 
 Потыкать можно [тут](https://shaaark.ga/).
 
@@ -26,5 +26,5 @@
 - Angular Material 
 - SemanticUI
 
-![EFT](https://i.imgur.com/lTrO6DV.png)
+![EFT](https://i.imgur.com/OTte13q.png)
 <!-- ![Genshin](https://i.imgur.com/bj0XvHq.png) -->
