@@ -1,9 +1,13 @@
+//* Core *//
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ViewerReducerState } from '../store/reducers/viewer.reducer'
 import { Subscription } from 'rxjs'
+
+//* NgRx *//
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
+import { ViewerReducerState } from '../store/reducers/viewer.reducer'
 import { CLOSE_VIEW } from '../store/actions/viewer.actions'
+
 
 @Component({
   selector: 'app-content-viewer',

@@ -1,11 +1,15 @@
+//* Core *//
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+
+//* NgRx *//
 import { Store } from '@ngrx/store';
 import { AppState } from '../store'
 import { ThreadReducerState } from '../store/reducers/threads.reducer';
 import { LOAD_CONTENT } from '../store/actions/viewer.actions'
 import { DvachFile } from '../store/models/threads.model';
 import { OptionsReducerState } from '../store/reducers/options.reducer';
+
 
 @Component({
   selector: 'app-preview',

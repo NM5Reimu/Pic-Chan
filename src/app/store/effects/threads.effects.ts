@@ -1,17 +1,17 @@
+/* Core */
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { ThreadsService } from '../../services/threads.service';
+import { map, mergeMap, catchError, tap, Subscription, of } from 'rxjs';
 
-//
+/* NgRx Store */
 import { Store } from '@ngrx/store';
 import { AppState } from '..';
-import { ThreadReducerState } from '../reducers/threads.reducer';
-
-//
-import { map, mergeMap, catchError, tap, Subscription, of } from 'rxjs';
-import { ThreadsService } from '../../services/threads.service';
-import { DELETE_THREAD, LOAD_THREAD_REQUEST, LOAD_THREAD_SUCCESS, UPDATE_THREAD_REQUEST, UPDATE_THREAD_SUCCESS, LOAD_THREAD_FAILURE } from '../actions/threads.actions';
 import { DvachThread, DvachFile, ResponceDvachThread } from '../models/threads.model';
+import { ThreadReducerState } from '../reducers/threads.reducer';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { DELETE_THREAD, LOAD_THREAD_REQUEST, LOAD_THREAD_SUCCESS, UPDATE_THREAD_REQUEST, UPDATE_THREAD_SUCCESS } from '../actions/threads.actions';
 import { SHOW_ERROR } from '../actions/error.actions';
+
  
 @Injectable()
 export class ThreadsEffects {

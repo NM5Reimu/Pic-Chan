@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs'
+
+/* NgRx Store */
 import { Store } from '@ngrx/store';
 import { AppState } from './store';
 import { ErrorReducerState } from './store/reducers/error.reducer';

@@ -1,9 +1,13 @@
+//* Core *//
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs'
+
+//* NgRx *//
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { CLOSE_ERROR } from '../store/actions/error.actions';
 import { ErrorReducerState } from '../store/reducers/error.reducer';
+
 
 @Component({
   selector: 'app-error-dialog',

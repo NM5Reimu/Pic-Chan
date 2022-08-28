@@ -1,3 +1,4 @@
+//* Core *//
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -15,6 +16,7 @@ import * as JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { DvachThread, DvachFile } from '../store/models/threads.model';
 
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -31,7 +33,6 @@ export class SearchComponent implements OnInit{
 
   enterURL: string = '';
   downloadDisable: boolean = false;
-
   updateTimer: ReturnType<typeof setTimeout>;
   
   constructor(private store: Store<AppState>) { }

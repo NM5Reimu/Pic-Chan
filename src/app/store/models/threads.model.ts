@@ -1,20 +1,3 @@
-// export class PostFile{
-// 	constructor(
-// 		public displayname: string,
-// 		public fullname: string,
-// 		public name: string,
-// 		public md5: string,
-// 		public path: string,
-// 		public thumbnail: string,
-// 		public type: number,
-// 		public height: number,
-// 		public width: number,
-// 		public tn_height: number,
-// 		public tn_width: number,
-// 		public size: number
-// 	){}
-// }
-  
 export class DvachThread{
 	constructor(
 		public board: string,
